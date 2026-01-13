@@ -13,7 +13,8 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ filters, onFilterChange, marksData, darkMode, toggleTheme }) => {
   // Extract unique filter options from marksData
   const options = useMemo(() => {
-    const years = Array.from(new Set(marksData.map(d => d.year))).sort((a, b) => b - a);
+    // Fix: Explicitly type sort parameters as numbers to resolve "The left-hand side of an arithmetic operation..." error
+    const years = Array.from(new Set(marksData.map(d => d.year))).sort((a: number, b: number) => b - a);
     const grades = Array.from(new Set(marksData.map(d => d.grade))).sort();
     const subjects = Array.from(new Set(marksData.map(d => d.subject))).sort();
     
